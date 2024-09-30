@@ -9,5 +9,5 @@ if (a === 0){
     }
 } else {
     let x = -b / a;
-    console.log(`Nghiệm của phương trình là: x = ${x}`);
+    console.log(`Nghiệm của phương trình là: x = ${x.toFixed(2)}`);
 }
