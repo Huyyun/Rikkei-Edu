@@ -1,10 +1,17 @@
 let n = +prompt("Nhập số nguyên dương bất kỳ:");
 
 while(true){
-    if (n > 0) {
+    if (n > 1) {
         console.log(`Các số nguyên tố nhỏ hơn ${n} là:`);
-        for (let i = 1; i < n; i++) {
-            if (i % 1 === 0 && i % i === 0){
+        for (let i = 2; i < n; i++) {
+            let prime = true;
+            for (let j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j === 0){
+                    prime = false;
+                    break;
+                }
+            }
+            if (prime) {
                 console.log(i);
             }
         }
