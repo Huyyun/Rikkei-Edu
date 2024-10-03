@@ -17,7 +17,7 @@ while(true){
         }
         break;
     } else {
-        console.log("Đây không phải là số nguyên dương. Vui lòng nhập lại");
+        alert("Đây không phải là số nguyên dương. Vui lòng nhập lại");
     }
     n = +prompt("Nhập số nguyên dương bất kỳ:");
 }
