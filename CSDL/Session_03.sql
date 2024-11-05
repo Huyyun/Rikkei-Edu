@@ -218,3 +218,10 @@ INSERT INTO `worker` (`id`, `name`, `birthday`, `year`, `skill`) VALUES
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+USE sql_qlct;
+INSERT INTO `architect` (`id`, `name`, `birthday`, `sex`, `place`, `address`)
+VALUES 
+	-- ('7', 'Hyun', 2003, 1, 'ha noi', 'ha dong'),
+	('10', 'Johnny English', 1986, 1, 'England', 'London'),
+    ('11', 'Will', 1989, 1, 'French', 'Paris');
