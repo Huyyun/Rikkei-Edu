@@ -1,11 +1,11 @@
 CREATE DATABASE `ECommerce_DB`;
-USE `ECommerce_DB`;
+USE ECommerce_DB;
 
 CREATE TABLE `Users` (
     `UserID` INT PRIMARY KEY AUTO_INCREMENT,
-    `Username` VARCHAR(50) UNIQUE NOT NULL,
+    `Username` VARCHAR(50) NOT NULL,
     `PasswordHash` VARCHAR(255) NOT NULL,
-    `Email` VARCHAR(100) UNIQUE NOT NULL,
+    `Email` VARCHAR(100) NOT NULL,
     `CreatedAt` DATETIME
 );
 
