@@ -220,8 +220,64 @@ INSERT INTO `worker` (`id`, `name`, `birthday`, `year`, `skill`) VALUES
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 USE sql_qlct;
+-- INSERT (Chèn)
 INSERT INTO `architect` (`id`, `name`, `birthday`, `sex`, `place`, `address`)
 VALUES 
 	-- ('7', 'Hyun', 2003, 1, 'ha noi', 'ha dong'),
 	('10', 'Johnny English', 1986, 1, 'England', 'London'),
     ('11', 'Will', 1989, 1, 'French', 'Paris');
+    
+-- UPDATE (Cập nhật)
+-- Cập nhật 1
+UPDATE `architect`
+SET `name` = 'Ngo Luong Huyen', `birthday` = 2003, `sex` = 0, `place` = 'Chine'
+WHERE `id` = 10;
+-- Cập nhật nhiều
+SET SQL_SAFE_UPDATES = 0;
+UPDATE `architect`
+SET `birthday` = '2000'
+WHERE `place` = 'ha noi';
+SET SQL_SAFE_UPDATES = 1;
+-- DELETE (Xóa)
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM `architect`
+WHERE `place` = 'French';
+SET SQL_SAFE_UPDATES = 1;
+-- SELECT (Truy vấn)
+-- Toàn bộ
+SELECT * FROM `architect`;
+-- Một số cột
+SELECT architect.`name`, architect.`birthday`
+FROM `architect`;
+-- Truy vấn độc nhất
+SELECT DISTINCT `name`, `birthday`
+FROM `architect`;
+-- Truy vấn sắp xếp
+-- Giảm dần
+SELECT * FROM `architect`
+ORDER BY `id` DESC; 
+-- Tăng dần
+SELECT * FROM `architect`
+ORDER BY `id` ASC;
+SELECT * FROM `architect`
+WHERE `birthday` <= 1970;
+SELECT * FROM `architect`
+WHERE `place` IN ('tp hcm', 'ha noi', 'da nang');
+SELECT * FROM `architect`
+WHERE `place` NOT IN ('tp hcm', 'ha noi', 'da nang');
+SELECT * FROM `architect`
+WHERE `place` IS NULL;
+SELECT * FROM `architect`
+WHERE `place` IS NOT NULL;
+SELECT * FROM `architect`
+WHERE `birthday` BETWEEN 1956 AND 2000;
+SELECT * FROM `architect`
+WHERE `name` BETWEEN 'le thanh tung' AND 'nguyen anh thu';
+SELECT * FROM `architect`
+WHERE `place` LIKE 'ha ___';
+SELECT * FROM `architect`
+WHERE `name` LIKE '% anh %';
+SELECT * FROM `architect`
+LIMIT 5;
+SELECT * FROM `architect`
+LIMIT 3 OFFSET 3;
