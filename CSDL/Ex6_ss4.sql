@@ -1,43 +1,32 @@
 CREATE DATABASE `Ex6_ss4`;
 USE Ex6_ss4;
-CREATE TABLE `Products` (
-	`ProductID` INT PRIMARY KEY AUTO_INCREMENT,
-    `ProductName` VARCHAR(100) NOT NULL
-);
-
-INSERT INTO `Products` (`ProductID`, `ProductName`) VALUES
-(1, 'Laptop'),
-(2, 'Smartphone'),
-(3, 'Tablet'),
-(4, 'Smartwatch'),
-(5, 'Headphones'),
-(6, 'Bluetooth Speaker'),
-(7, 'Monitor'),
-(8, 'Keyboard'),
-(9, 'Mouse'),
-(10, 'External Hard Drive');
-
-CREATE TABLE `OrderDetails` (
-	`OrderDetailID` INT PRIMARY KEY AUTO_INCREMENT,
-    `ProductID` INT NOT NULL,
-    FOREIGN KEY (ProductID) REFERENCES `Products`(ProductID),
-    `Quantity` INT NOT NULL,
+CREATE TABLE `Sales`(
+	`SaleID` INT PRIMARY KEY AUTO_INCREMENT,
+    `SaleDate` DATE NOT NULL,
     `Price` DECIMAL(10,2) NOT NULL
 );
 
-INSERT INTO `OrderDetails` (`OrderDetailID`, `ProductID`, `Quantity`, `Price`) VALUES
-(1, 1, 2, 1500.00),        
-(2, 2, 1, 800.00),          
-(3, 3, 3, 500.00),
-(4, 4, 2, 250.00),
-(5, 5, 5, 150.00),         
-(6, 6, 4, 100.00),        
-(7, 7, 1, 300.00),  
-(8, 8, 6, 50.00),           
-(9, 9, 10, 25.00),       
-(10, 10, 3, 120.00);  
+INSERT INTO `Sales` (`SaleID`, `SaleDate`, `Price`) VALUES
+(1, '2024-01-01', 150.00),
+(2, '2024-01-02', 200.00),
+(3, '2024-01-03', 300.00),
+(4, '2024-01-04', 250.00),
+(5, '2024-01-05', 400.00),
+(6, '2024-01-06', 350.00),
+(7, '2024-02-07', 220.00),
+(8, '2024-02-08', 180.00),
+(9, '2024-03-09', 275.00),
+(10, '2024-04-10', 320.00);
 
-SELECT p.ProductName, od.Quantity, od.Price
-FROM OrderDetails od
-INNER JOIN Products p ON p.ProductID = od.ProductID
-ORDER BY od.Quantity DESC;
+SELECT 
+    MONTH(SaleDate) AS Month,
+    YEAR(SaleDate) AS Year,
+    SUM(Price) AS TotalRevenue,
+    COUNT(SaleID) AS OrderCount,
+    AVG(Price) AS AverageOrderRevenue
+FROM 
+    Sales
+GROUP BY 
+    YEAR(SaleDate), MONTH(SaleDate)
+ORDER BY 
+    Year, Month;
