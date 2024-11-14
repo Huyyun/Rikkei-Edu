@@ -343,3 +343,15 @@ FROM work w
 INNER JOIN worker wr ON wr.id = w.worker_id
 GROUP BY w.worker_id
 HAVING COUNT(DISTINCT w.building_id) = (SELECT COUNT(*) FROM building);
+
+CREATE VIEW not_retired AS
+SELECT * FROM architect 
+WHERE YEAR(birthday) > 1964;
+DROP VIEW not_retired;
+
+SELECT * FROM not_retired;
+UPDATE not_retired
+SET place = 'ha noi'
+WHERE id = '4';
+
+SELECT * FROM architect;
