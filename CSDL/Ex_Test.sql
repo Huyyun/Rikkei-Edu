@@ -28,8 +28,10 @@ DROP TABLE IF EXISTS `carts`;
 CREATE TABLE `carts` (
   `cartId` varchar(255) NOT NULL,
   `userId` varchar(255) NOT NULL,
+  FOREIGN KEY (userId) REFERENCES users(userId),
   `quantityCart` int NOT NULL,
   `productId` varchar(255) NOT NULL,
+  FOREIGN KEY (productId) REFERENCES products(productId),
   PRIMARY KEY (`cartId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -79,6 +81,7 @@ CREATE TABLE `images` (
   `imageId` varchar(255) NOT NULL,
   `imageUrl` varchar(255) NOT NULL,
   `productId` varchar(255) NOT NULL,
+  FOREIGN KEY (productId) REFERENCES products(productId),
   PRIMARY KEY (`imageId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -103,7 +106,9 @@ DROP TABLE IF EXISTS `order_details`;
 CREATE TABLE `order_details` (
   `orderDetailId` varchar(255) NOT NULL,
   `productId` varchar(255) NOT NULL,
+  FOREIGN KEY (productId) REFERENCES products(productId),
   `orderId` varchar(255) NOT NULL,
+  FOREIGN KEY (orderId) REFERENCES orders(orderId),
   `quantityOrder` int NOT NULL,
   `priceOrder` int NOT NULL,
   PRIMARY KEY (`orderDetailId`)
@@ -132,7 +137,9 @@ CREATE TABLE `orders` (
   `addressOrder` varchar(255) NOT NULL,
   `nameOrder` varchar(255) NOT NULL,
   `userId` varchar(255) NOT NULL,
+  FOREIGN KEY (userId) REFERENCES users(userId),
   `storeId` varchar(255) NOT NULL,
+  FOREIGN KEY (storeId) REFERENCES stores(storeId),
   `createDateOrder` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `statusOrder` varchar(255) NOT NULL DEFAULT 'pending',
   `totalPrice` int NOT NULL,
@@ -167,8 +174,10 @@ CREATE TABLE `products` (
   `quantitySold` int DEFAULT NULL,
   `statusProduct` int NOT NULL DEFAULT '0',
   `storeId` varchar(255) NOT NULL,
+  FOREIGN KEY (storeId) REFERENCES stores(storeId),
   `imageProduct` varchar(255) NOT NULL,
   `categoryId` int NOT NULL,
+  FOREIGN KEY (categoryId) REFERENCES categories(categoryId),
   PRIMARY KEY (`productId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -195,7 +204,9 @@ CREATE TABLE `reviews` (
   `content` varchar(255) NOT NULL,
   `rate` int NOT NULL,
   `userId` varchar(255) NOT NULL,
+  FOREIGN KEY (userId) REFERENCES users(userId),
   `productId` varchar(255) NOT NULL,
+  FOREIGN KEY (productId) REFERENCES products(productId),
   `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`reviewId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -225,6 +236,7 @@ CREATE TABLE `stores` (
   `statusstore` int NOT NULL DEFAULT '0',
   `createdDateStore` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userId` varchar(255) NOT NULL,
+  FOREIGN KEY (userId) REFERENCES users(userId),
   `phone` varchar(255) NOT NULL,
   `emailStore` varchar(255) NOT NULL,
   PRIMARY KEY (`storeId`)
@@ -285,3 +297,18 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-11-21 17:58:59
+-- DROP DATABASE shopeeFake;
+
+-- Bài 3
+-- Liệt kê tất cả các thông tin về sản phẩm (products).
+SELECT * FROM products;
+
+-- Tìm tất cả các đơn hàng (orders) có tổng giá trị (totalPrice) lớn hơn 500,000.
+SELECT * FROM orders 
+WHERE totalPrice > 500000;
+
+-- Liệt kê tên và địa chỉ của tất cả các cửa hàng (stores).
+SELECT storeName, addressStore FROM stores;
+
+-- Tìm tất cả người dùng (users) có địa chỉ email kết thúc bằng '@gmail.com'.
+SELECT * FROM users
