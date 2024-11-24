@@ -281,3 +281,6 @@ SELECT * FROM `architect`
 LIMIT 5;
 SELECT * FROM `architect`
 LIMIT 3 OFFSET 3;
+
+
+Select CEILING(AVG(m.age))
