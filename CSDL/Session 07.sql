@@ -39,6 +39,34 @@ SELECT * FROM employee;
 INSERT INTO employee(id, name, gender, email)
 VALUES (201, 'abc-201', NULL, 'abc201@gmail.com');
 INSERT INTO employee(id, name, gender, email)
-VALUES (203, 'abc-203', NULL, 'abc203@gmail.com');
+VALUES (204, 'abc-204', NULL, 'abc204@gmail.com');
 
 SELECT * FROM employee_log;
+
+-- Tạo 1 trigger Before Insert 
+-- checkExceedLimit
+
+-- Trigger có tác dụng kiểm tra xem số lượng bản ghi hiện tại trong bảng có vượt quá 120 hay k?
+-- Nếu có thì không cho Insert vào trong bảng employee và hiển thị 
+-- "Employee exceed alowes limit"
+
+DELIMITER $$
+CREATE TRIGGER checkExceedLimit
+BEFORE INSERT
+ON employee
+FOR EACH ROW
+BEGIN
+	DECLARE count INT DEFAULT 0;
+    
+	SELECT COUNT(*)
+    INTO count
+    FROM employee;
+    
+    IF count > 110 THEN 
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employee exceed alowes limit';
+	END IF;
+END$$
+DELIMITER ;
+
+INSERT INTO employee(id, name, gender, email)
+VALUES (204, 'abc-204', NULL, 'abc204@gmail.com');
