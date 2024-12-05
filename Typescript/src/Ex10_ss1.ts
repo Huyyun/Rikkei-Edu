@@ -3,19 +3,15 @@ let month = prompt("Nhập tháng sinh của bạn:");
 
 let zodiacSign = "";
 
-// Kiểm tra xem người dùng có hủy nhập không
 if (day === null || month === null) {
     alert("Bạn đã hủy trò chơi!");
 } else {
-    // Chuyển giá trị nhập vào thành số
     let numDay = +day;
     let numMonth = +month;
 
-    // Kiểm tra tính hợp lệ của ngày và tháng
     if (isNaN(numDay) || isNaN(numMonth) || numDay < 1 || numDay > 31 || numMonth < 1 || numMonth > 12) {
         alert("Dữ liệu nhập vào không hợp lệ! Vui lòng nhập lại.");
     } else {
-        // Kiểm tra cung hoàng đạo
         switch(numMonth) {
             case 1:
                 if (numDay >= 20) {
