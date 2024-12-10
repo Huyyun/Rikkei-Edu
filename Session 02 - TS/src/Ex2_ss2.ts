@@ -19,7 +19,7 @@ function findMaxMin(arr: number[]): { max: number, min: number, maxIndex: number
     return { max, min, maxIndex, minIndex };
 }
 
-function main2() {
+function main() {
     let numbers: number[] = []; 
 
     console.log(`Nhập vào 10 số nguyên khác nhau:`);

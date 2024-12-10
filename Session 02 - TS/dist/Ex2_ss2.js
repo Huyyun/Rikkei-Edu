@@ -16,7 +16,7 @@ function findMaxMin(arr) {
     }
     return { max, min, maxIndex, minIndex };
 }
-function main2() {
+function main() {
     let numbers = [];
     console.log(`Nhập vào 10 số nguyên khác nhau:`);
     for (let i = 0; i < 10; i++) {
