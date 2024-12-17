@@ -106,3 +106,7 @@ let accounting = {
     describe: educationDepartment.describe.bind({ id: "2", name: "Accounting" }),
 };
 accounting.describe();
+
+// Homework
+// Làm BT khoảng 2 bài trong portal
+// Làm BT tổng hợp: https://docs.google.com/document/d/1PUlooMsHuMDwl62OVC_ubhcE68ENOcAY/edit
