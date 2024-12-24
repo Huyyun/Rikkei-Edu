@@ -157,6 +157,5 @@ class Main {
     }
 }
 
-// nn
 const app = new Main();
 app.bootstrap();
