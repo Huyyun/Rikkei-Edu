@@ -225,7 +225,6 @@ class Main {
 
     bootstrap(): void {
         let loop: boolean = true;
-
         
         while(loop) {
             console.log("Menu chức năng:");
