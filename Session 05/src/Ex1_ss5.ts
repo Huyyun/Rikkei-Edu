@@ -134,7 +134,7 @@ class TaskManager {
         console.log(`Quản lý ${name} đã được thêm với vai trò ${role} trong bộ phậnphận ${department}`);
         console.log("*************************");
         if (this.managers.length === 0) {
-            console.log("Không có bất kỳ nhân viên nào");
+            console.log("Không có bất kỳ quản lý nào");
         } else {
             this.managers.forEach(function(element: Manager, index: number){
                 console.log(`${index + 1}.${element.name} - ${element.role} - ${element.department}`);
@@ -148,7 +148,7 @@ class TaskManager {
         console.log(`Nhiệm vụ ${title} đã được thêm vớivới deadline ${deadline}`);
         console.log("*************************");
         if (this.tasks.length === 0) {
-            console.log("Không có bất kỳ nhân viên nào");
+            console.log("Không có bất kỳ nhiệm vụ nào");
         } else {
             this.tasks.forEach(function(element: Task, index: number){
                 console.log(`${index + 1}.${element.title} - ${element.deadline}`);
