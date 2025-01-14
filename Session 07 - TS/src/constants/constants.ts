@@ -1,0 +1,1 @@
+export const roomTypes: [string, string, string] = ["STANDARD", "DELUXE", "SUITE"];
