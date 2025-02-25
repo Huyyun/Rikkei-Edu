@@ -7,6 +7,4 @@ let pool = mysql.createPool({
     database: 'dev_data',
 });
 
-
-
 module.exports = pool;
