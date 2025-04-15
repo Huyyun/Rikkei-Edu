@@ -30,6 +30,7 @@ const authController = require('../controllers/auth.controller');
  *         description: Register Successfully !!!!
  */
 router.post('/register', authController.register);
+
 /**
  * @openapi
  * /api/auth/login:
