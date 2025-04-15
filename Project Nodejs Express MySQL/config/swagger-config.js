@@ -5,7 +5,7 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Project',
+      title: 'Project Du lịch',
       version: '1.0.0',
     },
     components: {
