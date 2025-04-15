@@ -19,7 +19,7 @@ const register = async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10); 
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = { name, email, password: hashedPassword, role };
     await User.create(newUser);
 
@@ -51,6 +51,7 @@ const login = async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("Password match:", isMatch);
     if (!isMatch) {
       return res.json({ 
         message: "Invalid email or password" 

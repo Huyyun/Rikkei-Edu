@@ -24,12 +24,11 @@ const User = {
 
     // Tạo người dùng mới
     create: async (user) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
         return db('users')
         .insert({
             name: user.name,
             email: user.email,
-            password: hashedPassword,
+            password: user.password,
             role: user.role || 'user',
         });
     },
