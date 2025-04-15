@@ -4,16 +4,16 @@ const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./docs/swagger');
 const morgan = require("morgan");
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// dotenv.config();
 
 const server = express();
 
 // Middleware
 server.use(cors());
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(morgan("dev"));
+// server.use(bodyParser.urlencoded({ extended: true }));
+// server.use(morgan("dev"));
 
 // Routes
 const authRoutes = require('./routes/auth.route');

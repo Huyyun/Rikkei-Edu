@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
-const verifyToken = (req, res, next) => {
+const authenticate = (req, res, next) => {
     const token = req.header('Authorization') && req.header('Authorization').split(' ')[1];
     
     if (!token) {
@@ -18,6 +19,19 @@ const verifyToken = (req, res, next) => {
             message: 'Invalid token' 
         });
     }
+
 };
 
-module.exports = { verifyToken };
+// Middleware phân quyền theo vai trò
+const authorize = (roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+        return res.json({ 
+            message: "Forbidden: Access denied" 
+        });
+    }
+    next();
+  };
+};
+
+module.exports = { authenticate, authorize };

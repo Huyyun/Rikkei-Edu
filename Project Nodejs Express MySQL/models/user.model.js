@@ -15,6 +15,13 @@ const User = {
         .first();
     },
 
+    // Tìm người dùng theo email
+    findByEmail: (email) => {
+        return db("users")
+        .where({ email })
+        .first();
+    },
+
     // Tạo người dùng mới
     create: async (user) => {
         const hashedPassword = await bcrypt.hash(user.password, 10);

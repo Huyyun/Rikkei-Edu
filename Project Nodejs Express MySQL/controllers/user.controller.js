@@ -12,6 +12,15 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
+    const { id } = req.params;
+    const userId = parseInt(id);
+    // Nếu không phải admin thì chỉ được xem chính mình
+    if (req.user.role !== "admin" && req.user.id !== userId) {
+        return res.json({ 
+            message: "Access denied" 
+        });
+    }
+
     try {
             const user = await User.findById(req.params.id);
             if (!user) {
@@ -55,6 +64,15 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+    const { id } = req.params;
+    const userId = parseInt(id);
+    // Nếu không phải admin thì chỉ được cập nhật chính mình
+    if (req.user.role !== "admin" && req.user.id !== userId) {
+        return res.json({ 
+            message: "Access denied" 
+        });
+    }
+
     try {
         const user = await User.findById(req.params.id);
         if (!user) {

@@ -21,6 +21,14 @@ const getBookingById = async (req, res) => {
         if (!booking) {
             return res.json({ message: 'Booking not found' });
         }
+
+        // Nếu không phải admin thì chỉ được xem booking của chính mình
+        if (req.user.role !== "admin" && req.user.id !== booking.user_id) {
+            return res.json({ 
+                message: "Access denied" 
+            });
+        }
+
         res.json(booking);
     } catch (err) {
         res.json({ 
@@ -94,6 +102,13 @@ const updateBooking = async (req, res) => {
             });
         }
 
+        // Nếu không phải admin thì chỉ được sửa booking của chính mình
+        if (req.user.role !== 'admin' && req.user.id !== booking.user_id) {
+            return res.json({ 
+                message: 'Access denied' 
+            });
+        }
+
         await Booking.update(id, status);
         res.json({ 
             message: 'Booking updated successfully' 
@@ -114,6 +129,13 @@ const deleteBooking = async (req, res) => {
         if (!booking) {
             return res.json({ 
                 message: 'Booking not found' 
+            });
+        }
+
+        // Nếu không phải admin thì chỉ được xóa booking của chính mình
+        if (req.user.role !== 'admin' && req.user.id !== booking.user_id) {
+            return res.json({ 
+                message: 'Access denied' 
             });
         }
 

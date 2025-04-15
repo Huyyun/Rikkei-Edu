@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller');
-const authMiddleware = require('../middlewares/auth.middleware');
+const { authenticate, authorize } = require("../middlewares/auth.middleware");
 
-router.get('/', authMiddleware.verifyToken, userController.getAllUsers);
-router.get('/:id', authMiddleware.verifyToken, userController.getUserById);
-router.post('/', authMiddleware.verifyToken, userController.createUser);
-router.put('/:id', authMiddleware.verifyToken, userController.updateUser);
-router.delete('/:id', authMiddleware.verifyToken, userController.deleteUser);
+// Chỉ admin được quyền xem tất cả user
+router.get('/', authenticate, authorize(["admin"]), userController.getAllUsers);
+// Admin hoặc chính user đó được xem thông tin cá nhân
+router.get('/:id', authenticate, authorize(["admin", "user"]), userController.getUserById);
+// Chỉ admin được thêm, sửa, xóa user, user có thể sử chính mình
+router.post('/', authenticate, authorize(["admin"]), userController.createUser);
+router.put('/:id', authenticate, authorize(["admin", "user"]), userController.updateUser);
+router.delete('/:id', authenticate, authorize(["admin"]), userController.deleteUser);
 
 module.exports = router;

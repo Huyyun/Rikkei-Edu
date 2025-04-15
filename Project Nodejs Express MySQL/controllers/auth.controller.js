@@ -19,7 +19,8 @@ const register = async (req, res) => {
       });
     }
 
-    const newUser = { name, email, password, role };
+    const hashedPassword = await bcrypt.hash(password, 10); 
+    const newUser = { name, email, password: hashedPassword, role };
     await User.create(newUser);
 
     res.json({ 
@@ -42,6 +43,7 @@ const login = async (req, res) => {
 
   try {
     const user = await User.findByEmail(email);
+    // console.log("password in DB:", user.password); 
     if (!user) {
       return res.json({ 
         message: "Invalid email or password" 
